@@ -13,9 +13,10 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
+      - run: mkdir build && mv main.pdf build/
       - name: Upload PDFs
         uses: actions/upload-pages-artifact@v1
         with:
-          path: main.pdf
+          path: build
       - name: Deploy PDFs
         uses: actions/deploy-pages@v2
