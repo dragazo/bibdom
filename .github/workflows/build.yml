@@ -1,10 +1,7 @@
 name: Build PDFs
 on:
   push:
-    branches:
-      - master
-permissions:
-  contents: write
+    branches: ["master"]
 
 jobs:
   build:
@@ -12,12 +9,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Build Latex
+      - name: Build PDFs
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
-      - run: mkdir build && mv *.pdf build/.
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload PDFs
+        uses: actions/upload-pages-artifact@v1
         with:
-          folder: build
+          path: main.pdf
+      - name: Deploy PDFs
+        uses: actions/deploy-pages@v2
